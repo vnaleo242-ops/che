@@ -150,11 +150,9 @@
                 listContainer.appendChild(div);
             });
             if (isFirstLoad && filtered.length > 0) {
-                // Tự động vào sẵn mô hình đầu tiên (nếu không phải mục Login)
-                if (filtered[0].url !== "LOGIN_ACTION") {
-                    selectModel(filtered[0], listContainer.firstChild);
-                    isFirstLoad = false;
-                }
+                // Tự động chọn mục đầu tiên (Chính là trang Đăng nhập)
+                selectModel(filtered[0], listContainer.firstChild);
+                isFirstLoad = false;
             }
         }
 
