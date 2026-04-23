@@ -3,238 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Biomedical Anatomy | Nền tảng Giải phẫu Y sinh học (Phiên bản Độc lập)</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        :root {
-            --brand-cyan: #00f2fe;
-            --brand-blue: #00c6ff;
-            --bg-dark: #050810;
-            --panel-glass: rgba(10, 15, 25, 0.85);
-            --border-glass: rgba(0, 242, 254, 0.2);
-        }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-dark);
-            color: white;
-            font-family: 'Inter', sans-serif;
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
-        }
-
-        .glass-panel {
-            background: var(--panel-glass);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border-glass);
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 242, 254, 0.05);
-        }
-
-        .scan-line {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--brand-cyan), transparent);
-            opacity: 0.15;
-            animation: scan 8s linear infinite;
-            pointer-events: none;
-            z-index: 100;
-        }
-
-        @keyframes scan {
-            0% { top: -10%; }
-            100% { top: 110%; }
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background-color: #000;
-        }
-
-        /* Medical Preloader */
-        #preloader {
-            position: fixed;
-            inset: 0;
-            background: var(--bg-dark);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            transition: opacity 0.8s ease;
-        }
-
-        .loader-ring {
-            width: 100px;
-            height: 100px;
-            border: 2px solid rgba(0, 242, 254, 0.1);
-            border-top: 2px solid var(--brand-cyan);
-            border-radius: 50%;
-            animation: spin 1.5s cubic-bezier(0.53, 0.21, 0.29, 0.67) infinite;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
-        }
-
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        .loader-text {
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            letter-spacing: 0.8em;
-            color: var(--brand-cyan);
-            text-transform: uppercase;
-            font-size: 14px;
-            animation: pulse-text 2s infinite;
-        }
-
-        @keyframes pulse-text {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; text-shadow: 0 0 15px var(--brand-cyan); }
-        }
-
-        .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
-
-        /* Animation for Floating Elements */
-        .animate-float-slow {
-            animation: float-slow 4s ease-in-out infinite;
-        }
-        @keyframes float-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-    </style>
+    <title>Khám phá Giải Phẫu 3D (v2)</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="relative select-none">
+<body>
+    <div id="login-helper" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px;">
+        <h2 style="color:#00f2fe; font-family:sans-serif;">BOT ĐANG SẴN SÀNG</h2>
+        <p style="color:white; font-family:sans-serif; margin-bottom:20px;">Nhấn nút bên dưới, sau đó dán (Ctrl+V) vào ô tài khoản để vào web ngay.</p>
+        <button onclick="startLogin()" style="background:#6366f1; color:white; border:none; padding:20px 40px; border-radius:15px; font-size:20px; font-weight:bold; cursor:pointer; box-shadow:0 0 20px rgba(99,102,241,0.5);">NHẤN ĐỂ ĐĂNG NHẬP NGAY</button>
+    </div>
+
     <script>
-        if (!sessionStorage.getItem('logged_in')) {
-            sessionStorage.setItem('logged_in', 'true');
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'https://facourse.com/login';
-            const phone = document.createElement('input');
-            phone.type = 'hidden';
-            phone.name = 'phone';
-            phone.value = '0358204005';
-            const pass = document.createElement('input');
-            pass.type = 'hidden';
-            pass.name = 'password';
-            pass.value = '0358204005';
-            form.appendChild(phone);
-            form.appendChild(pass);
-            document.body.appendChild(form);
-            form.submit();
+        function startLogin() {
+            document.getElementById('login-helper').style.display = 'flex';
+            // Copy mật khẩu vào clipboard
+            const el = document.createElement('textarea');
+            el.value = '0358204005';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            
+            alert("Đã copy tài khoản! Hãy nhấn Ctrl+V để dán vào trang Facourse sắp mở ra.");
+            
+            window.open('https://facourse.com/login', '_blank');
+            document.getElementById('login-helper').style.display = 'none';
         }
     </script>
 
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Sinh Học 3D</h2>
+                <p>Hệ thống mô phỏng giải phẫu - Facourse</p>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Tìm kiếm mô hình... (vd: Tim, Xương, Não)">
+                </div>
+            </div>
+            <div class="models-list" id="models-list">
+                <!-- Models will be injected here via JS -->
+            </div>
+        </aside>
+        
+        <main class="content">
+            <div class="header">
+                <h1 id="viewer-title">Chọn một mô hình giải phẫu</h1>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <!-- Đã xóa các nút chức năng để giao diện gọn gàng -->
+                </div>
+            </div>
+            <div class="viewer-container">
+                <div class="placeholder" id="viewer-placeholder">
+                    <div class="pulsing-circle"></div>
+                    <p>Hệ thống học mô phỏng 3D độc quyền.<br>Vui lòng chọn một khoá mô hình bên lề trái để bắt đầu khám phá.</p>
+                </div>
+                <div class="viewer-wrapper" id="viewer-wrapper" style="display: none;">
+                    <!-- Iframe được load trực tiếp và liên tục lưu giữ trạng thái -->
+                    <div id="iframe-cache-container" style="width: 100%; height: 100%; position: relative;"></div>
+                </div>
+        </main>
+    </div>
     
-    <!-- Instant Preloader -->
-    <div id="preloader">
-        <div class="loader-ring"></div>
-        <div class="loader-text">Initializing Clinical Engine</div>
-    </div>
-
-    <div class="scan-line"></div>
-
-    <!-- MAIN ENGINE VIEWPORT (Direct Embed - Multi-Control Enabled) -->
-    <div class="absolute inset-0 z-0 bg-black">
-        <iframe id="bioviewer" src="https://human.biodigital.com/viewer/?id=6lzK&ui-anatomy-descriptions=true&ui-anatomy-pronunciations=true&ui-anatomy-labels=true&ui-audio=true&ui-chapter-list=false&ui-fullscreen=true&ui-help=true&ui-info=true&ui-label-list=true&ui-layers=true&ui-skin-layers=true&ui-loader=circle&ui-media-controls=full&ui-media-sharing=true&ui-menu=true&ui-nav=true&ui-search=true&ui-tools=true&ui-tutorial=false&ui-undo=true&ui-whiteboard=true&initial.none=true&disable-scroll=false&uaid=MQtvs&paid=o_060a39b2&api=true&ui-zoom=true"></iframe>
-    </div>
-
-
-    <!-- UI OVERLAY: HEADER -->
-    <header class="absolute top-0 left-0 right-0 h-24 px-10 flex items-center justify-end z-30 pointer-events-none">
-        <div class="pointer-events-auto flex items-center gap-8">
-            <div class="relative">
-                <i data-lucide="search" class="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-cyan/60"></i>
-                <input type="text" placeholder="Tìm kiếm..." class="bg-black/80 border border-brand-cyan/20 rounded-full py-2.5 pl-14 pr-8 text-sm w-72 outline-none focus:border-brand-cyan shadow-2xl transition-all font-mono text-white">
-            </div>
-            <div class="h-8 w-[1px] bg-white/10"></div>
-            <div class="flex items-center gap-3">
-                <div class="w-2.5 h-2.5 rounded-full bg-brand-cyan animate-pulse shadow-[0_0_10px_#00f2fe]"></div>
-                <span class="text-[11px] font-mono tracking-[0.4em] text-brand-cyan font-bold uppercase">Clinical System</span>
-            </div>
-        </div>
-    </header>
-
-    <!-- UI OVERLAY: SYSTEM LABELS (Repositioned to Bottom-Left) -->
-    <div class="absolute bottom-10 left-10 pointer-events-none z-20">
-        <div class="flex items-center gap-6 glass-panel p-8 rounded-[2rem] border-brand-cyan/30 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.8)] animate-float-slow transition-all">
-           <div class="w-1.5 h-16 bg-gradient-to-b from-brand-cyan via-brand-cyan/50 to-transparent shadow-[0_0_20px_#00f2fe]"></div>
-           <div>
-             <h2 class="text-white font-rajdhani font-black tracking-[0.4em] text-3xl uppercase leading-none">TAM GIÁC CỔ</h2>
-             <div class="flex items-center gap-3 mt-3">
-               <div class="px-3 py-1 rounded-md bg-brand-cyan/20 border border-brand-cyan/50">
-                    <span class="text-[9px] text-brand-cyan font-mono font-black tracking-[0.2em] uppercase text-xs">BioDigital Engine</span>
-               </div>
-             </div>
-           </div>
-        </div>
-    </div>
-
-    <!-- UI OVERLAY: TELEMETRY BOX (Top-Left) -->
-    <div class="absolute top-28 left-24 z-20 pointer-events-none">
-        <div class="glass-panel p-5 rounded-3xl border-white/5 shadow-2xl animate-in slide-in-from-top-4 duration-1000">
-            <div class="flex items-center gap-4">
-                <div class="w-8 h-8 rounded-lg bg-brand-cyan/10 border border-brand-cyan/30 flex items-center justify-center">
-                    <i data-lucide="activity" class="w-4 h-4 text-brand-cyan"></i>
-                </div>
-                <div>
-                    <div class="text-[8px] text-white/40 font-mono tracking-widest uppercase">Pulse Index</div>
-                    <div class="text-xs font-rajdhani font-bold text-white tracking-widest uppercase">86 BPM — ACTIVE</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- UI OVERLAY: FOOTER ACTION -->
-    <footer class="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-8 z-30 pointer-events-none">
-        <div class="glass-panel px-8 py-3 rounded-full flex items-center gap-4 pointer-events-auto border-brand-cyan/10 hover:border-brand-cyan/40 transition-all bg-black/60 shadow-2xl">
-            <span class="text-[10px] text-brand-cyan font-mono font-bold tracking-[0.3em] uppercase">FACOURSE_PLATFORM</span>
-        </div>
-    </footer>
-
-
-    <script>
-        // Initialize Icons
-        lucide.createIcons();
-
-        // Initialize Loader
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            // Give 3D model extra second to begin mounting visually
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 800);
-            }, 1500);
-        });
-
-        // Toggle Fullscreen Capability
-        document.querySelector('[data-lucide="maximize"]').parentElement.addEventListener('click', () => {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen();
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
-            }
-        });
-    </script>
+    <script type="module" src="/script.js?v=2"></script>
 </body>
 </html>
