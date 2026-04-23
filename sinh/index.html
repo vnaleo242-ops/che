@@ -182,33 +182,25 @@
 
         function directLogin() {
             const status = document.getElementById('login-status');
-            status.innerText = "Đang mở cửa sổ xác thực...";
+            status.innerText = "Đang copy mã BOT...";
             status.style.display = 'block';
             status.style.color = '#6366f1';
 
-            // Tạo form để submit ra tab mới
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'https://facourse.com/login';
-            form.target = '_blank'; // BẮT BUỘC dùng tab mới để Facourse cho phép lưu Cookie
+            // Mã script để dán vào console
+            const botCode = "document.querySelector('#phone').value='0358204005';document.querySelector('#password').value='0358204005';document.querySelector('button[type=\"submit\"]').click();";
             
-            const phone = document.createElement('input');
-            phone.type = 'hidden'; phone.name = 'phone'; phone.value = '0358204005';
+            const el = document.createElement('textarea');
+            el.value = botCode;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
             
-            const pass = document.createElement('input');
-            pass.type = 'hidden'; pass.name = 'password'; pass.value = '0358204005';
+            alert("BOT ĐÃ SẴN SÀNG! \n1. Tab đăng nhập sẽ mở ra ngay bây giờ. \n2. Bạn nhấn F12 -> chọn Console. \n3. Nhấn Ctrl+V rồi Enter là xong!");
             
-            form.appendChild(phone);
-            form.appendChild(pass);
-            document.body.appendChild(form);
+            window.open('https://facourse.com/login', '_blank');
             
-            form.submit();
-            
-            setTimeout(() => {
-                status.innerText = "✓ Đã gửi yêu cầu! Hãy đóng tab vừa mở và tải lại mô hình.";
-                status.style.color = '#10b981';
-                document.body.removeChild(form);
-            }, 2000);
+            status.innerText = "✓ Đã copy mã Bot! Hãy dán vào Console ở tab mới.";
         }
 
         function startLogin() {
