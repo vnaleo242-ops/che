@@ -2,5 +2,8 @@
   "name": "anatomy-clinical-viewer",
   "version": 2,
   "cleanUrls": true,
-  "framework": null
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": "dist"
 }
