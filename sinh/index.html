@@ -182,15 +182,15 @@
 
         function directLogin() {
             const status = document.getElementById('login-status');
-            status.innerText = "Đang kết nối...";
+            status.innerText = "Đang mở cửa sổ xác thực...";
             status.style.display = 'block';
             status.style.color = '#6366f1';
 
-            // Tạo form để submit
+            // Tạo form để submit ra tab mới
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = 'https://facourse.com/login';
-            form.target = 'hidden_login_frame'; // Dùng iframe ẩn để không bị 405 trên trang chính
+            form.target = '_blank'; // BẮT BUỘC dùng tab mới để Facourse cho phép lưu Cookie
             
             const phone = document.createElement('input');
             phone.type = 'hidden'; phone.name = 'phone'; phone.value = '0358204005';
@@ -202,18 +202,13 @@
             form.appendChild(pass);
             document.body.appendChild(form);
             
-            try {
-                form.submit();
-                setTimeout(() => {
-                    status.innerText = "✓ Đã kết nối thành công!";
-                    status.style.color = '#10b981';
-                    // Tự động tải lại các mô hình để nhận cookie
-                    renderModels();
-                }, 2000);
-            } catch (e) {
-                status.innerText = "Lỗi kết nối. Hãy thử lại.";
-                status.style.color = '#ef4444';
-            }
+            form.submit();
+            
+            setTimeout(() => {
+                status.innerText = "✓ Đã gửi yêu cầu! Hãy đóng tab vừa mở và tải lại mô hình.";
+                status.style.color = '#10b981';
+                document.body.removeChild(form);
+            }, 2000);
         }
 
         function startLogin() {
