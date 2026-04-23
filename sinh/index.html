@@ -271,6 +271,14 @@
             document.getElementById('account-info-box').style.display = 'none';
         }
 
+        // CẢM BIẾN ENTER SIÊU TỐC
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && activeItem && activeItem.innerText.includes(LOGIN_ITEM_TITLE)) {
+                console.log("Phát hiện nhấn Enter - Đang chuyển mục...");
+                setTimeout(forceStart, 2000); // Đợi 2 giây để Facourse xử lý login rồi nhảy trang
+            }
+        });
+
         searchInput.addEventListener('input', (e) => renderModels(e.target.value));
         renderModels();
     </script>
