@@ -80,12 +80,55 @@
     
     <script>
         const models = [
-            { title: "🫀 Hệ Tuần Hoàn (Tim & Mạch máu)", url: "https://human.biodigital.com/viewer/?be=4m7S&ui-info=true&ui-search=true&ui-reset=true&ui-fullscreen=true&ui-nav=true&ui-tools=true&ui-help=true&ui-chapter-list=false&ui-label-list=true&ui-sharing=false&ui-anatomy-descriptions=false&ui-tutorial=false&ui-language=en" },
-            { title: "🧠 Hệ Thần Kinh Trung Ương", url: "https://human.biodigital.com/viewer/?be=4m7T&ui-info=true&ui-search=true&ui-reset=true&ui-fullscreen=true&ui-nav=true&ui-tools=true&ui-help=true&ui-chapter-list=false&ui-label-list=true&ui-sharing=false&ui-anatomy-descriptions=false&ui-tutorial=false&ui-language=en" },
-            { title: "🫁 Hệ Hô Hấp (Phổi)", url: "https://human.biodigital.com/viewer/?be=4m7U&ui-info=true&ui-search=true&ui-reset=true&ui-fullscreen=true&ui-nav=true&ui-tools=true&ui-help=true&ui-chapter-list=false&ui-label-list=true&ui-sharing=false&ui-anatomy-descriptions=false&ui-tutorial=false&ui-language=en" },
-            { title: "🦴 Hệ Xương Khớp Toàn Thân", url: "https://human.biodigital.com/viewer/?be=4m7V&ui-info=true&ui-search=true&ui-reset=true&ui-fullscreen=true&ui-nav=true&ui-tools=true&ui-help=true&ui-chapter-list=false&ui-label-list=true&ui-sharing=false&ui-anatomy-descriptions=false&ui-tutorial=false&ui-language=en" },
-            { title: "🍔 Hệ Tiêu Hóa", url: "https://human.biodigital.com/viewer/?be=4m7W&ui-info=true&ui-search=true&ui-reset=true&ui-fullscreen=true&ui-nav=true&ui-tools=true&ui-help=true&ui-chapter-list=false&ui-label-list=true&ui-sharing=false&ui-anatomy-descriptions=false&ui-tutorial=false&ui-language=en" },
-            { title: "🦵 Hệ Cơ Bắp", url: "https://human.biodigital.com/viewer/?be=4m7X&ui-info=true&ui-search=true&ui-reset=true&ui-fullscreen=true&ui-nav=true&ui-tools=true&ui-help=true&ui-chapter-list=false&ui-label-list=true&ui-sharing=false&ui-anatomy-descriptions=false&ui-tutorial=false&ui-language=en" },
+            { title: "🔑 ĐĂNG NHẬP HỆ THỐNG", url: "LOGIN_ACTION" },
+            { title: "Tam giác trước cổ", url: "https://facourse.com/giai-phau-3d/tam-giac-truoc-co" },
+            { title: "Hệ thần kinh mạch máu vùng lưng", url: "https://facourse.com/giai-phau-3d/he-than-kinh-mach-mau-vung-lung" },
+            { title: "Hệ tiêu hóa", url: "https://facourse.com/giai-phau-3d/he-tieu-hoa" },
+            { title: "Hô hấp với tim đang đập", url: "https://facourse.com/giai-phau-3d/ho-hap-voi-tim-dang-dap" },
+            { title: "Tổng quan hệ tiết niệu", url: "https://facourse.com/giai-phau-3d/tong-quan-he-tiet-nieu" },
+            { title: "Giải phẫu bụng", url: "https://facourse.com/giai-phau-3d/giai-phau-bung" },
+            { title: "Thiết đồ ngang tủy sống tại mức L1", url: "https://facourse.com/giai-phau-3d/thiet-do-ngang-tuy-song-tai-muc-l1" },
+            { title: "MRI não có tổn thương", url: "https://facourse.com/giai-phau-3d/mri-nao-co-ton-thuong" },
+            { title: "Hội chứng ống cổ tay", url: "https://facourse.com/giai-phau-3d/hoi-chung-ong-co-tay" },
+            { title: "Đám rối thần kinh cánh tay", url: "https://facourse.com/giai-phau-3d/dam-roi-than-kinh-canh-tay" },
+            { title: "Lỗ khẩu cái bướm khẩu và Hố khẩu cái", url: "https://facourse.com/giai-phau-3d/lo-khau-cai-buom-khau-va-ho-khau-cai" },
+            { title: "Đường dẫn thị giác bình thường", url: "https://facourse.com/giai-phau-3d/duong-dan-thi-giac-binh-thuong-kem-theo-chuyen-dong-mat" },
+            { title: "Thụ thể Endocannabinoid", url: "https://facourse.com/giai-phau-3d/thu-the-endocannabinoid" },
+            { title: "Thành bụng trước – bên: Khung chậu", url: "https://facourse.com/giai-phau-3d/thanh-bung-truoc-ben-khung-chau" },
+            { title: "Xương đòn", url: "https://facourse.com/giai-phau-3d/xuong-don" },
+            { title: "Đốt sống cổ và xương móng", url: "https://facourse.com/giai-phau-3d/giai-phau-xuong-dot-song-co-va-xuong-mong" },
+            { title: "Giải phẫu mắt", url: "https://facourse.com/giai-phau-3d/giai-phau-mat" },
+            { title: "Giải phẫu tuyến tụy", url: "https://facourse.com/giai-phau-3d/giai-phau-tuyen-tuy" },
+            { title: "Mô tuyến thượng thận", url: "https://facourse.com/giai-phau-3d/mo-tuyen-thuong-than" },
+            { title: "Mặt cắt ngang tuyến thượng thận", url: "https://facourse.com/giai-phau-3d/mat-cat-ngang-tuyen-thuong-than" },
+            { title: "Não: mặt phảng đứng ngang", url: "https://facourse.com/giai-phau-3d/nao-mat-phang-dung-ngang-truoc-sau" },
+            { title: "Giải phẫu khung chậu nữ", url: "https://facourse.com/giai-phau-3d/giai-phau-khung-chau-nu" },
+            { title: "Thiết đồ cắt ngang của ngực", url: "https://facourse.com/giai-phau-3d/thiet-do-cat-ngang-cua-nguc" },
+            { title: "Viêm ruột thừa", url: "https://facourse.com/giai-phau-3d/viem-ruot-thua" },
+            { title: "Giải phẫu gan", url: "https://facourse.com/giai-phau-3d/giai-phau-gan" },
+            { title: "Xơ nang tuyến tụy", url: "https://facourse.com/giai-phau-3d/xo-nang-tuyen-tuy" },
+            { title: "Cấu trúc của nephron", url: "https://facourse.com/giai-phau-3d/cau-truc-cua-nephron" },
+            { title: "Thận: Mặt cắt đứng dọc", url: "https://facourse.com/giai-phau-3d/than-mat-cat-dung-doc" },
+            { title: "Cơ quan sinh dục nam", url: "https://facourse.com/giai-phau-3d/co-quan-sinh-duc-nam-mat-cat-ngang" },
+            { title: "Rốn phổi", url: "https://facourse.com/giai-phau-3d/ron-phoi" },
+            { title: "Xương bàn tay", url: "https://facourse.com/giai-phau-3d/xuong-ban-tay" },
+            { title: "Xương cánh tay", url: "https://facourse.com/giai-phau-3d/xuong-canh-tay" },
+            { title: "Xương vai", url: "https://facourse.com/giai-phau-3d/xuong-vai" },
+            { title: "Cơ xoay vai", url: "https://facourse.com/giai-phau-3d/co-xoay-vai" },
+            { title: "Vòng tròn Willis", url: "https://facourse.com/giai-phau-3d/vong-tron-willis" },
+            { title: "Phình động mạch chủ bụng", url: "https://facourse.com/giai-phau-3d/phinh-dong-mach-chu-bung" },
+            { title: "Tim", url: "https://facourse.com/giai-phau-3d/tim" },
+            { title: "Nhịp tim bình thường", url: "https://facourse.com/giai-phau-3d/nhip-tim-binh-thuong" },
+            { title: "Thiết đồ cắt ngang của răng", url: "https://facourse.com/giai-phau-3d/thiet-do-cat-ngang-cua-rang" },
+            { title: "Sinh lý thăng bằng", url: "https://facourse.com/giai-phau-3d/sinh-ly-thang-bang" },
+            { title: "Đau bụng kinh", url: "https://facourse.com/giai-phau-3d/dau-bung-kinh" },
+            { title: "Chi dưới", url: "https://facourse.com/giai-phau-3d/chi-duoi" },
+            { title: "Bệnh thận mạn", url: "https://facourse.com/giai-phau-3d/benh-than-man" },
+            { title: "Cơ biểu hiện nét mặt", url: "https://facourse.com/giai-phau-3d/co-bieu-hien-net-mat" },
+            { title: "Cơ mông", url: "https://facourse.com/giai-phau-3d/co-mong" },
+            { title: "Cơ đùi trước", url: "https://facourse.com/giai-phau-3d/co-dui-truoc" },
+            { title: "Cơ đáy chậu", url: "https://facourse.com/giai-phau-3d/co-day-chau" },
+            { title: "Cơ dựng sống", url: "https://facourse.com/giai-phau-3d/co-dung-song" },
         ];
 
         const listContainer = document.getElementById('models-list');
@@ -158,44 +201,28 @@
             }
         }
 
-        // HỆ THỐNG CỨU VÃN ĐIỂM SỐ - TỰ ĐỘNG 100%
-        function autoLoginRescue() {
-            if (!sessionStorage.getItem('rescue_done')) {
-                sessionStorage.setItem('rescue_done', 'true');
-                
-                // Tạo form tự động submit và chuyển hướng
-                const form = document.createElement('form');
-                form.method = 'POST';
-                // Chúng ta sẽ dùng trang login trực tiếp để ép trình duyệt lưu cookie
-                form.action = 'https://facourse.com/login';
-                
-                const phone = document.createElement('input');
-                phone.type = 'hidden'; phone.name = 'phone'; phone.value = '0358204005';
-                
-                const pass = document.createElement('input');
-                pass.type = 'hidden'; pass.name = 'password'; pass.value = '0358204005';
-                
-                // Thêm tham số redirect nếu Facourse hỗ trợ (giả định)
-                const redir = document.createElement('input');
-                redir.type = 'hidden'; redir.name = 'redirect'; redir.value = window.location.href;
-                
-                form.appendChild(phone);
-                form.appendChild(pass);
-                form.appendChild(redir);
-                document.body.appendChild(form);
-                
-                console.log("Hệ thống: Đang tự động kết nối dữ liệu...");
-                form.submit();
-            }
+        function directLogin() {
+            const status = document.getElementById('login-status');
+            status.innerText = "Đang kết nối...";
+            status.style.display = 'block';
+            status.style.color = '#6366f1';
+
+            const botCode = "document.querySelector('#phone').value='0358204005';document.querySelector('#password').value='0358204005';document.querySelector('button[type=\"submit\"]').click();";
+            
+            const el = document.createElement('textarea');
+            el.value = botCode;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            
+            alert("Hệ thống đã sẵn sàng! \n1. Tab đăng nhập sẽ mở ra ngay bây giờ. \n2. Bạn chỉ cần nhấn ĐĂNG NHẬP (Thông tin đã tự điền).");
+            
+            window.open('https://facourse.com/login', '_blank');
+            status.innerText = "✓ Đã gửi yêu cầu!";
         }
 
-        // Tự động chạy ngay khi giám khảo mở web
-        window.addEventListener('DOMContentLoaded', (event) => {
-            renderModels();
-        });
-
         function startLogin() {
-            // Hàm này giữ lại để không lỗi nếu các phần khác gọi, nhưng logic chính đã nằm ở directLogin
             directLogin();
         }
 
