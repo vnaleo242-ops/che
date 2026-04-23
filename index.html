@@ -12,6 +12,26 @@
     <!-- Hidden Frame for Direct Login -->
     <iframe name="hidden_login_frame" style="display:none;"></iframe>
 
+    <!-- Bảng thông tin tài khoản nổi bật (Chỉ hiện khi vào mục Đăng nhập) -->
+    <div id="account-info-box" style="display:none; position:fixed; top:80px; right:30px; background: rgba(15, 23, 42, 0.95); border: 2px solid #6366f1; padding: 25px; border-radius: 20px; z-index: 1000; box-shadow: 0 20px 50px rgba(0,0,0,0.5); backdrop-filter: blur(10px); width: 280px; animation: slideIn 0.5s ease-out;">
+        <h3 style="color: #00f2fe; margin: 0 0 15px 0; font-size: 18px; font-family: sans-serif;">THÔNG TIN ĐĂNG NHẬP</h3>
+        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px;">
+            <p style="color: #94a3b8; margin: 0; font-size: 13px;">Tài khoản (SĐT):</p>
+            <p style="color: white; margin: 5px 0 15px 0; font-size: 20px; font-weight: bold; letter-spacing: 1px;">0358204005</p>
+            
+            <p style="color: #94a3b8; margin: 0; font-size: 13px;">Mật khẩu:</p>
+            <p style="color: white; margin: 5px 0 0 0; font-size: 20px; font-weight: bold; letter-spacing: 1px;">0358204005</p>
+        </div>
+        <p style="color: #6366f1; font-size: 12px; margin-top: 15px; font-style: italic;">* Vui lòng điền thông tin vào khung bên trái để bắt đầu.</p>
+    </div>
+
+    <style>
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+
     <div class="dashboard">
         <aside class="sidebar">
             <div class="sidebar-header">
@@ -135,11 +155,16 @@
         }
 
         function selectModel(model, element) {
+            // Hiển thị/Ẩn bảng thông tin tài khoản nổi bật
+            const accountBox = document.getElementById('account-info-box');
             if (model.url === "LOGIN_ACTION") {
-                startLogin();
-                element.style.display = 'none';
-                return;
+                accountBox.style.display = 'block';
+                // Thay đổi URL mục đăng nhập thành trang login thật của Facourse
+                model.url = 'https://facourse.com/login';
+            } else {
+                accountBox.style.display = 'none';
             }
+
             if (activeItem) activeItem.classList.remove('active');
             element.classList.add('active');
             activeItem = element;
