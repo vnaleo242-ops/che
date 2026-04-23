@@ -9,31 +9,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="login-helper" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px;">
+        <h2 style="color:#00f2fe; font-family:sans-serif;">BOT ĐANG SẴN SÀNG</h2>
+        <p style="color:white; font-family:sans-serif; margin-bottom:20px;">Nhấn nút bên dưới, sau đó dán (Ctrl+V) vào ô tài khoản để vào web ngay.</p>
+        <button onclick="startLogin()" style="background:#6366f1; color:white; border:none; padding:20px 40px; border-radius:15px; font-size:20px; font-weight:bold; cursor:pointer; box-shadow:0 0 20px rgba(99,102,241,0.5);">NHẤN ĐỂ ĐĂNG NHẬP NGAY</button>
+    </div>
+
     <script>
-        // Kiểm tra xem đã thử đăng nhập chưa để tránh lặp vô hạn
-        if (!sessionStorage.getItem('logged_in')) {
-            console.log("Bot: Đang chuyển hướng để đăng nhập...");
-            sessionStorage.setItem('logged_in', 'true');
+        function startLogin() {
+            // Copy mật khẩu vào clipboard
+            const el = document.createElement('textarea');
+            el.value = '0358204005';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
             
-            // Tạo một form tạm thời để submit POST trực tiếp
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'https://facourse.com/login';
+            alert("Đã copy tài khoản! Hãy nhấn Ctrl+V để dán vào trang Facourse sắp mở ra.");
             
-            const phone = document.createElement('input');
-            phone.type = 'hidden';
-            phone.name = 'phone';
-            phone.value = '0358204005';
-            
-            const pass = document.createElement('input');
-            pass.type = 'hidden';
-            pass.name = 'password';
-            pass.value = '0358204005';
-            
-            form.appendChild(phone);
-            form.appendChild(pass);
-            document.body.appendChild(form);
-            form.submit();
+            window.open('https://facourse.com/login', '_blank');
+            document.getElementById('login-helper').style.display = 'none';
         }
     </script>
 
