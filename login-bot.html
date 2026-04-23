@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Login Bot - Facourse</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .card { background: rgba(30, 41, 59, 0.7); padding: 2rem; border-radius: 1.5rem; border: 1px solid rgba(0, 242, 254, 0.2); text-align: center; max-width: 400px; }
+        h1 { color: #00f2fe; margin-bottom: 1rem; }
+        .btn { background: #6366f1; color: white; border: none; padding: 1rem 2rem; border-radius: 0.75rem; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; margin: 10px 0; transition: 0.3s; }
+        .btn:hover { background: #4f46e5; transform: scale(1.05); }
+        .instructions { font-size: 0.9rem; color: #94a3b8; margin-top: 1.5rem; line-height: 1.6; }
+        code { background: #000; padding: 2px 5px; border-radius: 4px; color: #00f2fe; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>BÔT ĐĂNG NHẬP</h1>
+        <p>Tài khoản: <code>0358204005</code></p>
+        
+        <a href="https://facourse.com/login" target="_blank" class="btn">MỞ TRANG ĐĂNG NHẬP</a>
+        
+        <div class="instructions">
+            <p><strong>CÁCH DÙNG NHANH:</strong></p>
+            <ol style="text-align: left;">
+                <li>Nhấn nút <b>Mở trang đăng nhập</b> ở trên.</li>
+                <li>Copy đoạn mã dưới đây dán vào thanh địa chỉ (Address Bar) rồi nhấn Enter, hoặc chạy trong Console (F12):</li>
+            </ol>
+            <textarea id="bot-code" style="width: 100%; height: 80px; background: #000; color: #00f2fe; border: 1px solid #334155; border-radius: 8px; padding: 10px; font-family: monospace; font-size: 10px;" readonly>javascript:(function(){document.querySelector('#phone').value='0358204005';document.querySelector('#password').value='0358204005';document.querySelector('button[type="submit"], button').click();})();</textarea>
+            <button onclick="copyCode()" class="btn" style="padding: 5px 10px; font-size: 12px; background: #334155;">COPY MÃ BOT</button>
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            var copyText = document.getElementById("bot-code");
+            copyText.select();
+            document.execCommand("copy");
+            alert("Đã copy mã! Hãy dán vào Console (F12) của trang Facourse để đăng nhập tự động.");
+        }
+    </script>
+</body>
+</html>
