@@ -23,6 +23,9 @@
             <p style="color: white; margin: 5px 0 0 0; font-size: 20px; font-weight: bold; letter-spacing: 1px;">0358204005</p>
         </div>
         <p style="color: #6366f1; font-size: 12px; margin-top: 15px; font-style: italic;">* Vui lòng điền thông tin vào khung bên trái để bắt đầu.</p>
+        
+        <!-- Nút dự phòng nếu tự động không chạy -->
+        <button onclick="forceStart()" style="width: 100%; background: #10b981; color: white; border: none; padding: 12px; border-radius: 10px; margin-top: 15px; cursor: pointer; font-size: 14px; font-weight: bold; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">👉 VÀO XEM MÔ HÌNH 3D</button>
     </div>
 
     <style>
@@ -251,6 +254,22 @@
 
         function startLogin() {
             directLogin();
+        }
+
+        function forceStart() {
+            const items = document.querySelectorAll('.model-item');
+            items.forEach(item => {
+                if (item.innerText.includes(LOGIN_ITEM_TITLE)) {
+                    item.style.display = 'none';
+                }
+            });
+            const targetModel = models.find(m => m.title === "Tam giác trước cổ");
+            const targetElement = Array.from(document.querySelectorAll('.model-item'))
+                .find(el => el.innerText.includes("Tam giác trước cổ"));
+            if (targetModel && targetElement) {
+                selectModel(targetModel, targetElement);
+            }
+            document.getElementById('account-info-box').style.display = 'none';
         }
 
         searchInput.addEventListener('input', (e) => renderModels(e.target.value));
