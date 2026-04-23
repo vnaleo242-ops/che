@@ -154,12 +154,15 @@
             }
         }
 
+        let loginLoadedCount = 0;
+        const LOGIN_ITEM_TITLE = "🔑 ĐĂNG NHẬP HỆ THỐNG";
+
         function selectModel(model, element) {
-            // Hiển thị/Ẩn bảng thông tin tài khoản nổi bật
             const accountBox = document.getElementById('account-info-box');
-            if (model.url === "LOGIN_ACTION") {
+            if (model.title === LOGIN_ITEM_TITLE) {
                 accountBox.style.display = 'block';
-                // Thay đổi URL mục đăng nhập thành trang login thật của Facourse
+                // Reset count khi vào trang login
+                loginLoadedCount = 0;
                 model.url = 'https://facourse.com/login';
             } else {
                 accountBox.style.display = 'none';
@@ -171,10 +174,12 @@
             viewerTitle.innerText = model.title;
             placeholder.style.display = 'none';
             wrapper.style.display = 'block';
+            
             if (currentIframe) {
                 currentIframe.style.display = 'none';
                 currentIframe.style.opacity = '0';
             }
+            
             if (iframeCache[model.url]) {
                 currentIframe = iframeCache[model.url];
                 currentIframe.style.display = 'block';
@@ -186,6 +191,35 @@
                 newIframe.allow = "autoplay; fullscreen; vr";
                 newIframe.allowFullscreen = true;
                 newIframe.style.opacity = '0';
+                
+                // BỘ CẢM BIẾN TỰ ĐỘNG
+                newIframe.onload = function() {
+                    if (model.title === LOGIN_ITEM_TITLE) {
+                        loginLoadedCount++;
+                        // Lần load thứ 2 thường là sau khi nhấn nút Đăng nhập thành công
+                        if (loginLoadedCount >= 2) {
+                            setTimeout(() => {
+                                // 1. Tìm và ẩn mục đăng nhập trong danh sách
+                                const items = document.querySelectorAll('.model-item');
+                                items.forEach(item => {
+                                    if (item.innerText.includes(LOGIN_ITEM_TITLE)) {
+                                        item.style.display = 'none';
+                                    }
+                                });
+                                // 2. Tự động chuyển sang Tam giác trước cổ
+                                const targetModel = models.find(m => m.title === "Tam giác trước cổ");
+                                const targetElement = Array.from(document.querySelectorAll('.model-item'))
+                                    .find(el => el.innerText.includes("Tam giác trước cổ"));
+                                if (targetModel && targetElement) {
+                                    selectModel(targetModel, targetElement);
+                                }
+                                // 3. Ẩn bảng thông tin
+                                document.getElementById('account-info-box').style.display = 'none';
+                            }, 1000);
+                        }
+                    }
+                };
+
                 iframeCacheContainer.appendChild(newIframe);
                 currentIframe = newIframe;
                 currentIframe.style.display = 'block';
