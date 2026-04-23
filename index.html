@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khám phá Giải Phẫu 3D</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Sinh Học 3D</h2>
+                <p>Hệ thống mô phỏng giải phẫu - Facourse</p>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Tìm kiếm mô hình... (vd: Tim, Xương, Não)">
+                </div>
+            </div>
+            <div class="models-list" id="models-list">
+                <!-- Models will be injected here via JS -->
+            </div>
+        </aside>
+        
+        <main class="content">
+            <div class="header">
+                <h1 id="viewer-title">Chọn một mô hình giải phẫu</h1>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <!-- Đã xóa các nút chức năng để giao diện gọn gàng -->
+                </div>
+            </div>
+            <div class="viewer-container">
+                <div class="placeholder" id="viewer-placeholder">
+                    <div class="pulsing-circle"></div>
+                    <p>Hệ thống học mô phỏng 3D độc quyền.<br>Vui lòng chọn một khoá mô hình bên lề trái để bắt đầu khám phá.</p>
+                </div>
+                <div class="viewer-wrapper" id="viewer-wrapper" style="display: none;">
+                    <!-- Iframe được load trực tiếp và liên tục lưu giữ trạng thái -->
+                    <div id="iframe-cache-container" style="width: 100%; height: 100%; position: relative;"></div>
+                </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-cyan: #00f2fe;
+  --color-brand-blue: #00c6ff;
+  --color-brand-purple: #7c3aed;
+  --color-medical-bg: #050810;
+  --color-medical-panel: #0a0f19;
+  --color-medical-surface: rgba(16, 25, 40, 0.45);
+  
+  --font-inter: "Inter", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-medical-bg text-white font-inter antialiased overflow-hidden h-screen w-screen;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.1), transparent 30%),
+      radial-gradient(circle at 90% 80%, rgba(124, 58, 237, 0.1), transparent 30%),
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-medical-surface border border-white/10 shadow-2xl;
+    backdrop-filter: blur(24px) saturate(180%);
+  }
+  
+  .premium-text-primary {
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  .premium-text-secondary {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .scan-line {
+    @apply absolute left-0 w-full h-[2px] z-20 pointer-events-none;
+    background: linear-gradient(90deg, transparent, #00f2fe, transparent);
+    box-shadow: 0 0 15px #00f2fe;
+    animation: scan 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  /* PREMIUM MEDICAL TOOLTIPS */
+  .hotspot-label {
+    @apply bg-medical-panel/90 border border-brand-cyan px-4 py-2 rounded-lg shadow-[0_0_20px_rgba(0,242,254,0.3)] transition-all duration-300;
+    backdrop-filter: blur(10px);
+    pointer-events: auto;
+  }
+
+  .hotspot-number {
+    @apply w-6 h-6 rounded-full bg-brand-cyan text-black flex items-center justify-center font-bold text-xs shadow-[0_0_10px_#00f2fe] cursor-pointer hover:scale-110 transition-transform;
+  }
+}
+
+@keyframes scan {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
+}
