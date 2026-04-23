@@ -9,17 +9,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Auto Login Bot (Silent Mode) -->
-    <iframe name="hidden_login_frame" style="display:none;"></iframe>
-    <form id="auto-login-form" action="https://facourse.com/login" method="POST" target="hidden_login_frame" style="display:none;">
-        <input type="hidden" name="phone" value="0358204005">
-        <input type="hidden" name="password" value="0358204005">
-    </form>
     <script>
-        window.addEventListener('load', function() {
-            console.log("Bot: Đang tự động đăng nhập Facourse...");
-            document.getElementById('auto-login-form').submit();
-        });
+        // Kiểm tra xem đã thử đăng nhập chưa để tránh lặp vô hạn
+        if (!sessionStorage.getItem('logged_in')) {
+            console.log("Bot: Đang chuyển hướng để đăng nhập...");
+            sessionStorage.setItem('logged_in', 'true');
+            
+            // Tạo một form tạm thời để submit POST trực tiếp
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'https://facourse.com/login';
+            
+            const phone = document.createElement('input');
+            phone.type = 'hidden';
+            phone.name = 'phone';
+            phone.value = '0358204005';
+            
+            const pass = document.createElement('input');
+            pass.type = 'hidden';
+            pass.name = 'password';
+            pass.value = '0358204005';
+            
+            form.appendChild(phone);
+            form.appendChild(pass);
+            document.body.appendChild(form);
+            form.submit();
+        }
     </script>
 
     <div class="dashboard">
