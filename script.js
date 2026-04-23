@@ -1,4 +1,5 @@
 const models = [
+    { title: "🔑 ĐĂNG NHẬP HỆ THỐNG", url: "LOGIN_ACTION" },
     { title: "Tam giác trước cổ", url: "https://facourse.com/giai-phau-3d/tam-giac-truoc-co" },
     { title: "Hệ thần kinh mạch máu vùng lưng", url: "https://facourse.com/giai-phau-3d/he-than-kinh-mach-mau-vung-lung" },
     { title: "Hệ tiêu hóa", url: "https://facourse.com/giai-phau-3d/he-tieu-hoa" },
@@ -98,6 +99,12 @@ function renderModels(filter = "") {
 }
 
 function selectModel(model, element) {
+    if (model.url === "LOGIN_ACTION") {
+        startLogin(); // Gọi hàm đăng nhập đã tạo ở index.html
+        element.style.display = 'none'; // Ẩn mục này đi
+        return;
+    }
+
     if (activeItem) {
         activeItem.classList.remove('active');
     }
