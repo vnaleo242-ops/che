@@ -13,28 +13,46 @@
     <!-- Hidden Frame for Direct Login -->
     <iframe name="hidden_login_frame" style="display:none;"></iframe>
 
-    <!-- Bảng thông tin tài khoản nổi bật (Chỉ hiện khi vào mục Đăng nhập) -->
-    <div id="account-info-box" style="display:none; position:fixed; top:80px; right:30px; background: rgba(15, 23, 42, 0.95); border: 2px solid #6366f1; padding: 25px; border-radius: 20px; z-index: 1000; box-shadow: 0 20px 50px rgba(0,0,0,0.5); backdrop-filter: blur(10px); width: 280px; animation: slideIn 0.5s ease-out;">
-        <h3 style="color: #00f2fe; margin: 0 0 15px 0; font-size: 18px; font-family: sans-serif;">THÔNG TIN ĐĂNG NHẬP</h3>
-        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px;">
-            <p style="color: #94a3b8; margin: 0; font-size: 13px;">Tài khoản (SĐT):</p>
-            <p style="color: white; margin: 5px 0 15px 0; font-size: 20px; font-weight: bold; letter-spacing: 1px;">0358204005</p>
-            
-            <p style="color: #94a3b8; margin: 0; font-size: 13px;">Mật khẩu:</p>
-            <p style="color: white; margin: 5px 0 0 0; font-size: 20px; font-weight: bold; letter-spacing: 1px;">0358204005</p>
+    <!-- Modal Đăng nhập tự động -->
+    <div id="login-overlay" style="display:none; position:fixed; inset:0; background:rgba(5,10,25,0.92); backdrop-filter:blur(16px); z-index:9999; display:none; align-items:center; justify-content:center;">
+      <div style="background:linear-gradient(135deg,#0f1729 0%,#1a2240 100%); border:1px solid rgba(99,102,241,0.4); border-radius:28px; padding:48px 40px; max-width:420px; width:90%; box-shadow:0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(99,102,241,0.15); text-align:center; font-family:'Outfit',sans-serif;">
+        <!-- Icon loading spinner -->
+        <div id="login-spinner" style="margin:0 auto 24px; width:72px; height:72px; border-radius:50%; border:3px solid rgba(99,102,241,0.2); border-top-color:#6366f1; animation:spin 1s linear infinite;"></div>
+        <!-- Icon thành công -->
+        <div id="login-success-icon" style="display:none; margin:0 auto 24px; width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg,#10b981,#059669); display:none; align-items:center; justify-content:center; font-size:36px;">✓</div>
+        
+        <h2 id="login-overlay-title" style="color:#fff; font-size:22px; font-weight:700; margin:0 0 8px;">Đang xử lý đăng nhập...</h2>
+        <p id="login-overlay-sub" style="color:#64748b; font-size:14px; margin:0 0 32px; line-height:1.6;">Hệ thống đang mở cửa sổ đăng nhập.<br>Đợi vài giây để hoàn tất tự động.</p>
+        
+        <!-- Bước tiến trình -->
+        <div style="display:flex; gap:8px; justify-content:center; margin-bottom:32px;">
+          <div id="step1" style="flex:1; height:4px; border-radius:2px; background:#6366f1; transition:all 0.5s;"></div>
+          <div id="step2" style="flex:1; height:4px; border-radius:2px; background:rgba(255,255,255,0.1); transition:all 0.5s;"></div>
+          <div id="step3" style="flex:1; height:4px; border-radius:2px; background:rgba(255,255,255,0.1); transition:all 0.5s;"></div>
         </div>
-        <div style="margin-top: 20px;">
-            <button onclick="forceStart()" style="width: 100%; background: #10b981; color: white; border: none; padding: 15px; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: bold; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4); border: 2px solid white;">🚀 VÀO XEM MÔ HÌNH 3D</button>
+        
+        <div id="login-manual-section" style="display:none; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:20px; margin-bottom:24px; text-align:left;">
+          <p style="color:#94a3b8; font-size:12px; margin:0 0 12px; text-transform:uppercase; letter-spacing:1px;">Thông tin đăng nhập</p>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="color:#64748b; font-size:13px;">Số điện thoại</span>
+            <span style="color:#fff; font-weight:700; font-size:16px; letter-spacing:1px;">0358204005</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="color:#64748b; font-size:13px;">Mật khẩu</span>
+            <span style="color:#fff; font-weight:700; font-size:16px; letter-spacing:1px;">0358204005</span>
+          </div>
         </div>
-        <p style="color: #6366f1; font-size: 11px; margin-top: 15px; font-style: italic;">* Nhấn nút xanh sau khi điền xong mật khẩu.</p>
+        
+        <button id="login-done-btn" onclick="onLoginDoneClicked()" style="display:none; width:100%; padding:16px; border-radius:14px; border:none; background:linear-gradient(135deg,#6366f1,#818cf8); color:#fff; font-size:16px; font-weight:700; cursor:pointer; letter-spacing:0.5px; box-shadow:0 8px 24px rgba(99,102,241,0.4); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          🚀 Vào xem mô hình 3D ngay!
+        </button>
+      </div>
     </div>
-
     <style>
-        @keyframes slideIn {
-            from { transform: translateX(100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
+      @keyframes spin { to { transform: rotate(360deg); } }
     </style>
+
+
 
     <div class="dashboard">
         <aside class="sidebar">
@@ -156,18 +174,113 @@
             }
         }
 
-        let loginLoadedCount = 0;
         const LOGIN_ITEM_TITLE = "🔑 ĐĂNG NHẬP HỆ THỐNG";
+        let loginPopup = null;
+        let loginCheckInterval = null;
+
+        // === HIỆN OVERLAY VÀ MỞ POPUP ===
+        function showLoginOverlay() {
+            const overlay = document.getElementById('login-overlay');
+            overlay.style.display = 'flex';
+            document.getElementById('login-spinner').style.display = 'block';
+            document.getElementById('login-success-icon').style.display = 'none';
+            document.getElementById('login-overlay-title').innerText = 'Đang mở trang đăng nhập...';
+            document.getElementById('login-overlay-sub').innerHTML = 'Hệ thống đang tự động điền thông tin.<br>Đợi vài giây để hoàn tất.';
+            document.getElementById('login-manual-section').style.display = 'none';
+            document.getElementById('login-done-btn').style.display = 'none';
+            document.getElementById('step1').style.background = '#6366f1';
+            document.getElementById('step2').style.background = 'rgba(255,255,255,0.1)';
+            document.getElementById('step3').style.background = 'rgba(255,255,255,0.1)';
+
+            const PHONE = '0358204005';
+            const PASS  = '0358204005';
+
+            loginPopup = window.open('https://facourse.com/login', 'FacourseLogin',
+                'width=620,height=720,top=80,left=200,resizable=yes');
+
+            // Sau 3 giây: thử inject thông tin vào popup
+            setTimeout(() => {
+                document.getElementById('step2').style.background = '#6366f1';
+                document.getElementById('login-overlay-title').innerText = 'Đang điền thông tin...';
+                try {
+                    if (loginPopup && !loginPopup.closed) {
+                        const pw = loginPopup;
+                        const phoneEl = pw.document.getElementById('phone');
+                        const passEl  = pw.document.getElementById('password');
+                        if (phoneEl && passEl) {
+                            // Dùng native setter để vượt qua React controlled inputs
+                            const nativeSetter = Object.getOwnPropertyDescriptor(pw.HTMLInputElement.prototype, 'value').set;
+                            nativeSetter.call(phoneEl, PHONE);
+                            nativeSetter.call(passEl, PASS);
+                            phoneEl.dispatchEvent(new pw.Event('input', { bubbles: true }));
+                            passEl.dispatchEvent(new pw.Event('input', { bubbles: true }));
+                            const btn = pw.document.querySelector('button[type="submit"]');
+                            if (btn) btn.click();
+                            document.getElementById('step3').style.background = '#6366f1';
+                            document.getElementById('login-overlay-title').innerText = 'Đăng nhập thành công!';
+                            document.getElementById('login-overlay-sub').innerHTML = 'Phiên đăng nhập đã hoàn tất.<br>Nhấn nút bên dưới để vào xem mô hình.';
+                            document.getElementById('login-spinner').style.display = 'none';
+                            document.getElementById('login-success-icon').style.display = 'flex';
+                            document.getElementById('login-done-btn').style.display = 'block';
+                        } else {
+                            showManualFallback();
+                        }
+                    } else {
+                        showManualFallback();
+                    }
+                } catch (e) {
+                    // Popup bị chặn hoặc CORS → chuyển sang hướng dẫn thủ công
+                    showManualFallback();
+                }
+            }, 3000);
+
+            // Theo dõi popup đóng tự động
+            loginCheckInterval = setInterval(() => {
+                if (loginPopup && loginPopup.closed) {
+                    clearInterval(loginCheckInterval);
+                    if (document.getElementById('login-overlay').style.display === 'flex') {
+                        onLoginDoneClicked();
+                    }
+                }
+            }, 1000);
+        }
+
+        function showManualFallback() {
+            document.getElementById('login-overlay-title').innerText = 'Nhập thông tin vào cửa sổ mới';
+            document.getElementById('login-overlay-sub').innerHTML = 'Điền thông tin dưới đây vào cửa sổ Facourse, sau đó nhấn "Đăng nhập".';
+            document.getElementById('login-manual-section').style.display = 'block';
+            document.getElementById('login-spinner').style.display = 'none';
+            document.getElementById('step2').style.background = '#f59e0b';
+            document.getElementById('login-done-btn').innerText = '✓ Tôi đã nhấn Đăng nhập - Tiếp tục!';
+            document.getElementById('login-done-btn').style.display = 'block';
+        }
+
+        function onLoginDoneClicked() {
+            clearInterval(loginCheckInterval);
+            if (loginPopup && !loginPopup.closed) loginPopup.close();
+            document.getElementById('login-overlay').style.display = 'none';
+            forceStart();
+        }
+
+        function forceStart() {
+            const items = document.querySelectorAll('.model-item');
+            items.forEach(item => {
+                if (item.innerText.includes(LOGIN_ITEM_TITLE)) item.style.display = 'none';
+            });
+            const targetModel = models.find(m => m.title === "Tam giác trước cổ");
+            const targetElement = Array.from(document.querySelectorAll('.model-item'))
+                .find(el => el.innerText.includes("Tam giác trước cổ"));
+            if (targetModel && targetElement) selectModel(targetModel, targetElement);
+        }
 
         function selectModel(model, element) {
-            const accountBox = document.getElementById('account-info-box');
             if (model.title === LOGIN_ITEM_TITLE) {
-                accountBox.style.display = 'block';
-                // Reset count khi vào trang login
-                loginLoadedCount = 0;
-                model.url = 'https://facourse.com/login';
-            } else {
-                accountBox.style.display = 'none';
+                if (activeItem) activeItem.classList.remove('active');
+                element.classList.add('active');
+                activeItem = element;
+                viewerTitle.innerText = model.title;
+                showLoginOverlay();
+                return;
             }
 
             if (activeItem) activeItem.classList.remove('active');
@@ -176,12 +289,12 @@
             viewerTitle.innerText = model.title;
             placeholder.style.display = 'none';
             wrapper.style.display = 'block';
-            
+
             if (currentIframe) {
                 currentIframe.style.display = 'none';
                 currentIframe.style.opacity = '0';
             }
-            
+
             if (iframeCache[model.url]) {
                 currentIframe = iframeCache[model.url];
                 currentIframe.style.display = 'block';
@@ -193,35 +306,6 @@
                 newIframe.allow = "autoplay; fullscreen; vr";
                 newIframe.allowFullscreen = true;
                 newIframe.style.opacity = '0';
-                
-                // BỘ CẢM BIẾN TỰ ĐỘNG
-                newIframe.onload = function() {
-                    if (model.title === LOGIN_ITEM_TITLE) {
-                        loginLoadedCount++;
-                        // Lần load thứ 2 thường là sau khi nhấn nút Đăng nhập thành công
-                        if (loginLoadedCount >= 2) {
-                            setTimeout(() => {
-                                // 1. Tìm và ẩn mục đăng nhập trong danh sách
-                                const items = document.querySelectorAll('.model-item');
-                                items.forEach(item => {
-                                    if (item.innerText.includes(LOGIN_ITEM_TITLE)) {
-                                        item.style.display = 'none';
-                                    }
-                                });
-                                // 2. Tự động chuyển sang Tam giác trước cổ
-                                const targetModel = models.find(m => m.title === "Tam giác trước cổ");
-                                const targetElement = Array.from(document.querySelectorAll('.model-item'))
-                                    .find(el => el.innerText.includes("Tam giác trước cổ"));
-                                if (targetModel && targetElement) {
-                                    selectModel(targetModel, targetElement);
-                                }
-                                // 3. Ẩn bảng thông tin
-                                document.getElementById('account-info-box').style.display = 'none';
-                            }, 100);
-                        }
-                    }
-                };
-
                 iframeCacheContainer.appendChild(newIframe);
                 currentIframe = newIframe;
                 currentIframe.style.display = 'block';
@@ -229,55 +313,6 @@
                 iframeCache[model.url] = currentIframe;
             }
         }
-
-        function directLogin() {
-            const status = document.getElementById('login-status');
-            status.innerText = "Đang kết nối...";
-            status.style.display = 'block';
-            status.style.color = '#6366f1';
-
-            const botCode = "document.querySelector('#phone').value='0358204005';document.querySelector('#password').value='0358204005';document.querySelector('button[type=\"submit\"]').click();";
-            
-            const el = document.createElement('textarea');
-            el.value = botCode;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
-            
-            alert("Hệ thống đã sẵn sàng! \n1. Tab đăng nhập sẽ mở ra ngay bây giờ. \n2. Bạn chỉ cần nhấn ĐĂNG NHẬP (Thông tin đã tự điền).");
-            
-            window.open('https://facourse.com/login', '_blank');
-            status.innerText = "✓ Đã gửi yêu cầu!";
-        }
-
-        function startLogin() {
-            directLogin();
-        }
-
-        function forceStart() {
-            const items = document.querySelectorAll('.model-item');
-            items.forEach(item => {
-                if (item.innerText.includes(LOGIN_ITEM_TITLE)) {
-                    item.style.display = 'none';
-                }
-            });
-            const targetModel = models.find(m => m.title === "Tam giác trước cổ");
-            const targetElement = Array.from(document.querySelectorAll('.model-item'))
-                .find(el => el.innerText.includes("Tam giác trước cổ"));
-            if (targetModel && targetElement) {
-                selectModel(targetModel, targetElement);
-            }
-            document.getElementById('account-info-box').style.display = 'none';
-        }
-
-        // CẢM BIẾN ENTER SIÊU TỐC
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && activeItem && activeItem.innerText.includes(LOGIN_ITEM_TITLE)) {
-                console.log("Phát hiện nhấn Enter - Đang chuyển mục...");
-                setTimeout(forceStart, 2000); // Đợi 2 giây để Facourse xử lý login rồi nhảy trang
-            }
-        });
 
         searchInput.addEventListener('input', (e) => renderModels(e.target.value));
         renderModels();
