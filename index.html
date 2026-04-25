@@ -16,7 +16,7 @@
     <!-- Modal Đăng nhập tự động -->
     <!-- Modal Đăng nhập tự động -->
     <div id="login-overlay" style="display:none; position:fixed; inset:0; background:rgba(5,10,25,0.92); backdrop-filter:blur(16px); z-index:9999; align-items:center; justify-content:center; flex-direction:column; padding:10px;">
-      <div style="background:linear-gradient(135deg,#0f1729 0%,#1a2240 100%); border:1px solid rgba(99,102,241,0.4); border-radius:24px; padding:24px; width:min(600px,100%); max-height:95vh; overflow-y:auto; box-shadow:0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(99,102,241,0.15); font-family:'Outfit',sans-serif;">
+      <div style="background:linear-gradient(135deg,#0f1729 0%,#1a2240 100%); border:1px solid rgba(99,102,241,0.4); border-radius:24px; padding:24px; width:min(600px,100%); height:95vh; display:flex; flex-direction:column; box-shadow:0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(99,102,241,0.15); font-family:'Outfit',sans-serif;">
         <!-- Header -->
         <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
           <div id="login-spinner" style="flex-shrink:0; width:40px; height:40px; border-radius:50%; border:3px solid rgba(99,102,241,0.2); border-top-color:#6366f1; animation:spin 1s linear infinite;"></div>
@@ -47,13 +47,13 @@
           </div>
         </div>
 
-        <!-- Iframe nhúng trang đăng nhập Facourse -->
-        <div style="border-radius:16px; overflow:hidden; height:360px; border:1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+        <!-- Iframe nhúng trang đăng nhập Facourse - flex:1 để tự lấp đầy khoảng trống -->
+        <div style="border-radius:16px; overflow:hidden; flex:1; min-height:150px; border:1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
           <iframe id="login-iframe" src="about:blank" style="width:100%; height:100%; border:none;"></iframe>
         </div>
         
-        <!-- Nút tiếp tục -->
-        <button id="login-done-btn" onclick="onLoginDoneClicked()" style="display:none; width:100%; margin-top:24px; padding:18px; border-radius:16px; border:none; background:linear-gradient(135deg,#10b981,#059669); color:#fff; font-size:18px; font-weight:800; text-transform:uppercase; letter-spacing:1px; cursor:pointer; box-shadow:0 12px 32px rgba(16,185,129,0.4); transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-4px) scale(1.01)'; this.style.boxShadow='0 20px 40px rgba(16,185,129,0.6)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 12px 32px rgba(16,185,129,0.4)';">🚀 Vào xem mô hình 3D ngay!</button>
+        <!-- Nút tiếp tục - LUÔN HIỂN THỊ, không cần kéo xuống -->
+        <button id="login-done-btn" onclick="onLoginDoneClicked()" style="display:block; width:100%; margin-top:14px; flex-shrink:0; padding:16px; border-radius:16px; border:none; background:linear-gradient(135deg,#10b981,#059669); color:#fff; font-size:17px; font-weight:800; text-transform:uppercase; letter-spacing:1px; cursor:pointer; box-shadow:0 12px 32px rgba(16,185,129,0.4); transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); opacity:0.5;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 20px 40px rgba(16,185,129,0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 12px 32px rgba(16,185,129,0.4)';">✅ Tôi đã đăng nhập — Vào xem mô hình 3D!</button>
       </div>
     </div>
     <style>
@@ -238,7 +238,7 @@
                             document.getElementById('login-overlay-sub').innerText = 'Phiên đã xác thực. Nhấn nút bên dưới để tiếp tục.';
                             document.getElementById('login-spinner').style.display = 'none';
                             document.getElementById('login-success-icon').style.display = 'flex';
-                            document.getElementById('login-done-btn').style.display = 'block';
+                            document.getElementById('login-done-btn').style.opacity = '1';
                         }, 500);
                     } else {
                         showManualFallback();
@@ -249,8 +249,7 @@
                     document.getElementById('login-overlay-title').innerText = 'Điền thông tin vào form bên dưới';
                     document.getElementById('login-overlay-sub').innerText = 'Dùng SĐT và mật khẩu bên dưới để đăng nhập.';
                     document.getElementById('login-manual-section').style.display = 'block';
-                    document.getElementById('login-done-btn').innerText = '✓ Tôi đã đăng nhập - Tiếp tục!';
-                    document.getElementById('login-done-btn').style.display = 'block';
+                    document.getElementById('login-done-btn').style.opacity = '1';
                 }
             };
 
@@ -268,8 +267,7 @@
                     document.getElementById('login-overlay-sub').innerText = 'Nhấn nút bên dưới để vào xem mô hình.';
                     document.getElementById('login-spinner').style.display = 'none';
                     document.getElementById('login-success-icon').style.display = 'flex';
-                    document.getElementById('login-done-btn').style.display = 'block';
-                    document.getElementById('login-done-btn').innerText = '🚀 Vào xem mô hình 3D ngay!';
+                    document.getElementById('login-done-btn').style.opacity = '1';
                 }
             };
         }
@@ -280,8 +278,7 @@
             document.getElementById('login-manual-section').style.display = 'block';
             document.getElementById('login-spinner').style.display = 'none';
             document.getElementById('step2').style.background = '#f59e0b';
-            document.getElementById('login-done-btn').innerText = '✓ Tôi đã nhấn Đăng nhập - Tiếp tục!';
-            document.getElementById('login-done-btn').style.display = 'block';
+            document.getElementById('login-done-btn').style.opacity = '1';
         }
 
         function onLoginDoneClicked() {
