@@ -15,7 +15,7 @@
 
     <div id="login-overlay" style="display:none; position:fixed; inset:0; background:rgba(5,10,25,0.92); backdrop-filter:blur(16px); z-index:9999; align-items:center; justify-content:center; flex-direction:column; padding:10px;">
       <!-- Wrapper chính: flex column cố định chiều cao -->
-      <div style="background:linear-gradient(135deg,#0f1729 0%,#1a2240 100%); border:1px solid rgba(99,102,241,0.4); border-radius:24px; width:min(560px,100%); height:95vh; display:flex; flex-direction:column; box-shadow:0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(99,102,241,0.15); font-family:'Outfit',sans-serif; overflow:hidden;">
+      <div style="background:linear-gradient(135deg,#0f1729 0%,#1a2240 100%); border:1px solid rgba(99,102,241,0.4); border-radius:24px; width:min(560px,100%); height:auto; max-height:95vh; display:flex; flex-direction:column; box-shadow:0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(99,102,241,0.15); font-family:'Outfit',sans-serif; overflow:hidden;">
         
         <!-- Phần nội dung cuộn được (flex:1) -->
         <div style="flex:1; overflow-y:auto; padding:24px 24px 0 24px;">
@@ -206,7 +206,7 @@
             document.getElementById('login-overlay-title').innerText = 'Đang tải trang đăng nhập...';
             document.getElementById('login-overlay-sub').innerText = 'Hệ thống đang điền thông tin vào form bên dưới.';
             document.getElementById('login-manual-section').style.display = 'none';
-            document.getElementById('login-done-btn').style.display = 'none';
+            // document.getElementById('login-done-btn').style.display = 'none'; // Giữ lại để đăng nhập nhanh
             document.getElementById('step1').style.background = '#6366f1';
             document.getElementById('step2').style.background = 'rgba(255,255,255,0.1)';
             document.getElementById('step3').style.background = 'rgba(255,255,255,0.1)';
