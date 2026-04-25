@@ -321,7 +321,11 @@
                 setTimeout(() => currentIframe.style.opacity = '1', 50);
             } else {
                 const newIframe = document.createElement('iframe');
-                newIframe.src = model.url;
+                let finalUrl = model.url;
+                if (finalUrl.includes("facourse.com")) {
+                    finalUrl += (finalUrl.includes("?") ? "&" : "?") + "lang=vi&ui-lang=vi";
+                }
+                newIframe.src = finalUrl;
                 newIframe.frameBorder = "0";
                 newIframe.allow = "autoplay; fullscreen; vr";
                 newIframe.allowFullscreen = true;
