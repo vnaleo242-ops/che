@@ -326,6 +326,11 @@
                 newIframe.allow = "autoplay; fullscreen; vr";
                 newIframe.allowFullscreen = true;
                 newIframe.style.opacity = '0';
+                
+                if (model.url.includes("facourse.com")) {
+                    newIframe.classList.add("facourse-mode");
+                }
+                
                 iframeCacheContainer.appendChild(newIframe);
                 currentIframe = newIframe;
                 currentIframe.style.display = 'block';

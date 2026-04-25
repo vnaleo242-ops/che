@@ -219,12 +219,12 @@ body {
 
 /* Chế độ đặc biệt dành riêng cho link từ facourse.com để cắt râu ria rác (header, chat, logo) */
 .viewer-wrapper iframe.facourse-mode {
-    /* Dịch chuyển mảng frame đi để CHE đi top banner (~82px) */
-    top: -82px; 
+    /* Dịch chuyển mảng frame đi để CHE đi toàn bộ top banner và phần icon con vật (~150px) */
+    top: -150px; 
     /* Đẩy khung iframe dôi ra bên phải 100px để giấu đi toàn bộ các nút trôi nổi (Chatbot) ở mép phải */
     width: calc(100% + 100px); 
     /* Đẩy phần đít của web gốc (chứa banner BioDigital và Chatbot) ra ngoài khung nhìn */
-    height: calc(100% + 155px);
+    height: calc(100% + 250px);
 }
 
 /* Chế độ "Khéo léo" dành riêng cho BioDigital Studio để chỉ lấy phần 3D trung tâm */
